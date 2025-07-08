@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerMovement2D : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerMovement2D : MonoBehaviour
     private bool isGrounded;
     private PlayerInputActions inputActions;
 
+    private Collider2D playerCollider;
+    private bool canFallThrough = true;
     void Awake()
     {
         inputActions = new PlayerInputActions();
@@ -35,11 +38,18 @@ public class PlayerMovement2D : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (moveInput.y < -0.5f && IsOnPlatform())
+        {
+            canFallThrough = false;
+            StartCoroutine(TemporarilyDisablePlatformCollision());
+        }
     }
 
     void FixedUpdate()
@@ -53,5 +63,25 @@ public class PlayerMovement2D : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
+    }
+
+    private IEnumerator TemporarilyDisablePlatformCollision()
+    {
+        Debug.Log("moveInput: " + moveInput.y);
+        int playerLayer = gameObject.layer;
+        int platformLayer = LayerMask.NameToLayer("Platform");
+
+        Debug.Log($"Disabling collision between {playerLayer} and {platformLayer}");
+        Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, true);
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log($"Enabling collision between {playerLayer} and {platformLayer}");
+        Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
+        canFallThrough = true;
+    }
+
+    private bool IsOnPlatform()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Platform"));
+        return hit != null;
     }
 }
