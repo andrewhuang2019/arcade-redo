@@ -47,8 +47,11 @@ public class PlayerMovement2D : MonoBehaviour
 
         if (moveInput.y < -0.5f && IsOnPlatform())
         {
-            canFallThrough = false;
-            StartCoroutine(TemporarilyDisablePlatformCollision());
+            Collider2D platform = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Platform"));
+            if (platform != null)
+            {
+                StartCoroutine(TemporarilyDisablePlatform(platform));
+            }
         }
     }
 
@@ -65,9 +68,12 @@ public class PlayerMovement2D : MonoBehaviour
         }
     }
 
-    private IEnumerator TemporarilyDisablePlatformCollision()
+    private IEnumerator TemporarilyDisablePlatform(Collider2D platformCollider)
     {
-        Debug.Log("moveInput: " + moveInput.y);
+        platformCollider.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        platformCollider.enabled = true;
+        /*Debug.Log("moveInput: " + moveInput.y);
         int playerLayer = gameObject.layer;
         int platformLayer = LayerMask.NameToLayer("Platform");
 
@@ -77,6 +83,7 @@ public class PlayerMovement2D : MonoBehaviour
         Debug.Log($"Enabling collision between {playerLayer} and {platformLayer}");
         Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
         canFallThrough = true;
+        */
     }
 
     private bool IsOnPlatform()
