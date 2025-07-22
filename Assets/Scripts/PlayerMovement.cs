@@ -16,7 +16,6 @@ public class PlayerMovement2D : MonoBehaviour
     private PlayerInputActions inputActions;
 
     private Collider2D playerCollider;
-    private bool canFallThrough = true;
     void Awake()
     {
         inputActions = new PlayerInputActions();
