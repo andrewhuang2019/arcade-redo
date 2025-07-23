@@ -14,6 +14,7 @@ public class PlayerMovement2D : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
     private PlayerInputActions inputActions;
+    private SpriteRenderer spriteRenderer;
 
     private Collider2D playerCollider;
     void Awake()
@@ -38,6 +39,7 @@ public class PlayerMovement2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -51,6 +53,15 @@ public class PlayerMovement2D : MonoBehaviour
             {
                 StartCoroutine(TemporarilyDisablePlatform(platform));
             }
+        }
+        
+        if (moveInput.x > 0.01f)
+        {
+            spriteRenderer.flipX = false; // face right
+        }
+        else if (moveInput.x < -0.01f)
+        {
+            spriteRenderer.flipX = true; // face left
         }
     }
 
