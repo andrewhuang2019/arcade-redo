@@ -9,44 +9,30 @@ public class PlayerMovement2D : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
+    public Animator animator;
 
     private Rigidbody2D rb;
-    private Vector2 moveInput;
-    private bool isGrounded;
-    private PlayerInputActions inputActions;
+    private Collider2D playerCollider;
     private SpriteRenderer spriteRenderer;
 
-    private Collider2D playerCollider;
-    void Awake()
-    {
-        inputActions = new PlayerInputActions();
-    }
-
-    void OnEnable()
-    {
-        inputActions.Enable();
-        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        inputActions.Player.Jump.performed += ctx => Jump();
-    }
-
-    void OnDisable()
-    {
-        inputActions.Disable();
-    }
+    private PlayerInputHandler inputHandler;
+    private bool isGrounded;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        inputHandler = GetComponent<PlayerInputHandler>();
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if (moveInput.y < -0.5f && IsOnPlatform())
+        animator.SetFloat("Speed", Mathf.Abs(inputHandler.MoveInput.x));
+
+        if (inputHandler.MoveInput.y < -0.5f && IsOnPlatform())
         {
             Collider2D platform = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Platform"));
             if (platform != null)
@@ -54,28 +40,34 @@ public class PlayerMovement2D : MonoBehaviour
                 StartCoroutine(TemporarilyDisablePlatform(platform));
             }
         }
-        
-        if (moveInput.x > 0.01f)
+
+        if (inputHandler.MoveInput.x > 0.01f)
+            spriteRenderer.flipX = false;
+        else if (inputHandler.MoveInput.x < -0.01f)
+            spriteRenderer.flipX = true;
+
+        if (inputHandler.JumpPressed)
         {
-            spriteRenderer.flipX = false; // face right
-        }
-        else if (moveInput.x < -0.01f)
-        {
-            spriteRenderer.flipX = true; // face left
+            Jump();
         }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(inputHandler.MoveInput.x * moveSpeed, rb.linearVelocity.y);
     }
-
     void Jump()
     {
         if (isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            animator.SetBool("IsJumping", true);
         }
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
     }
 
     private IEnumerator TemporarilyDisablePlatform(Collider2D platformCollider)
@@ -83,17 +75,6 @@ public class PlayerMovement2D : MonoBehaviour
         platformCollider.enabled = false;
         yield return new WaitForSeconds(0.5f);
         platformCollider.enabled = true;
-        /*Debug.Log("moveInput: " + moveInput.y);
-        int playerLayer = gameObject.layer;
-        int platformLayer = LayerMask.NameToLayer("Platform");
-
-        Debug.Log($"Disabling collision between {playerLayer} and {platformLayer}");
-        Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, true);
-        yield return new WaitForSeconds(0.5f);
-        Debug.Log($"Enabling collision between {playerLayer} and {platformLayer}");
-        Physics2D.IgnoreLayerCollision(playerLayer, platformLayer, false);
-        canFallThrough = true;
-        */
     }
 
     private bool IsOnPlatform()
