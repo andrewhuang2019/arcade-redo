@@ -17,10 +17,17 @@ public class PlayerMovement2D : MonoBehaviour
 
     private PlayerInputHandler inputHandler;
     private bool isGrounded;
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck == null) return;
 
+        Gizmos.color = Color.red;  // Choose any color you like
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.WakeUp();
         playerCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         inputHandler = GetComponent<PlayerInputHandler>();
@@ -28,7 +35,22 @@ public class PlayerMovement2D : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        bool falling = rb.linearVelocity.y < -0.1f;
+        bool groundedNow = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (groundedNow && falling)
+        {
+            animator.SetTrigger("Land");
+            OnLanding();
+        }
+
+        Debug.Log($"Grounded now: {groundedNow}");
+        Debug.Log($"isGrounded: {isGrounded}");
+        float verticalSpeed = rb.linearVelocity.y;
+
+        animator.SetFloat("VerticalSpeed", verticalSpeed);
+
+        isGrounded = groundedNow;
 
         animator.SetFloat("Speed", Mathf.Abs(inputHandler.MoveInput.x));
 
@@ -50,6 +72,7 @@ public class PlayerMovement2D : MonoBehaviour
         {
             Jump();
         }
+
     }
 
     void FixedUpdate()
