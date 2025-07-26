@@ -44,8 +44,8 @@ public class PlayerMovement2D : MonoBehaviour
             OnLanding();
         }
 
-        Debug.Log($"Grounded now: {groundedNow}");
-        Debug.Log($"isGrounded: {isGrounded}");
+        //Debug.Log($"Grounded now: {groundedNow}");
+        //Debug.Log($"isGrounded: {isGrounded}");
         float verticalSpeed = rb.linearVelocity.y;
 
         animator.SetFloat("VerticalSpeed", verticalSpeed);
@@ -64,9 +64,14 @@ public class PlayerMovement2D : MonoBehaviour
         }
 
         if (inputHandler.MoveInput.x > 0.01f)
-            spriteRenderer.flipX = false;
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
         else if (inputHandler.MoveInput.x < -0.01f)
-            spriteRenderer.flipX = true;
+        { 
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+            
 
         if (inputHandler.JumpPressed)
         {

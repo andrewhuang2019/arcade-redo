@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -131,19 +131,19 @@ TextureImporter:
       name: HumansProjectiles_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 36
-        width: 28
-        height: 7
+        x: 0
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0d424209669bd1430800000000000000
+      spriteID: 38bdc7925d49cb04791552b62c2b056b
       internalID: 3755361514452952272
       vertices: []
       indices: 
@@ -153,19 +153,19 @@ TextureImporter:
       name: HumansProjectiles_1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 20
-        width: 11
-        height: 7
+        x: 16
+        y: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f72a787aa6bbe6510800000000000000
+      spriteID: 880f52ecd0630a249a88181eaae5235e
       internalID: 1544377788986270335
       vertices: []
       indices: 
@@ -175,19 +175,19 @@ TextureImporter:
       name: HumansProjectiles_2
       rect:
         serializedVersion: 2
-        x: 18
-        y: 20
-        width: 11
-        height: 7
+        x: 0
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 86b0e0292761333f0800000000000000
+      spriteID: 5cf0b55113d7a6d449bbc8bfacfae91f
       internalID: -922368817348342936
       vertices: []
       indices: 
@@ -197,19 +197,19 @@ TextureImporter:
       name: HumansProjectiles_3
       rect:
         serializedVersion: 2
-        x: 5
-        y: 5
-        width: 6
-        height: 6
+        x: 16
+        y: 16
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4c2565cce42d45060800000000000000
+      spriteID: 69960de97c5592b47a4457a0f5fb426f
       internalID: 6941404161562268356
       vertices: []
       indices: 
@@ -219,19 +219,19 @@ TextureImporter:
       name: HumansProjectiles_4
       rect:
         serializedVersion: 2
-        x: 20
-        y: 4
-        width: 8
-        height: 8
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a3ddd8896958d7610800000000000000
+      spriteID: 6e2ee87faacc10844940bd5ec5d25cc8
       internalID: 1620598322774269242
       vertices: []
       indices: 
@@ -241,20 +241,86 @@ TextureImporter:
       name: HumansProjectiles_5
       rect:
         serializedVersion: 2
-        x: 35
-        y: 2
-        width: 42
-        height: 12
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2a4944738cd060e80800000000000000
+      spriteID: 233e48d65ad376343a2e6a16f3f7f93d
       internalID: -8212861716891659102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumansProjectiles_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ec66fec5ba657428d93d703d33a723
+      internalID: -487141515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumansProjectiles_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14a13e6da5f6a70428498d09ff542771
+      internalID: 1397358826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumansProjectiles_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66368e2945f66684cb8e29fd0f63be7c
+      internalID: -369675834
       vertices: []
       indices: 
       edges: []
@@ -263,7 +329,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -271,7 +337,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       HumansProjectiles_0: 3755361514452952272
       HumansProjectiles_1: 1544377788986270335
@@ -279,6 +349,9 @@ TextureImporter:
       HumansProjectiles_3: 6941404161562268356
       HumansProjectiles_4: 1620598322774269242
       HumansProjectiles_5: -8212861716891659102
+      HumansProjectiles_6: -487141515
+      HumansProjectiles_7: 1397358826
+      HumansProjectiles_8: -369675834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
